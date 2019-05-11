@@ -1,41 +1,38 @@
-const { resolve, join } = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { resolve, join } = require("path");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: resolve(__dirname, '../src/index.tsx'),
+  entry: resolve(__dirname, "../src/index.tsx"),
   resolve: {
-    extensions: ['.ts', '.tsx', '.js', '.jsx'],
+    extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   output: {
-    path: resolve(__dirname, '../dist/'),
-    filename: 'bundle.min.js',
+    path: resolve(__dirname, "../dist/"),
+    filename: "bundle.min.js"
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
-        loader: 'awesome-typescript-loader',
+        loader: "awesome-typescript-loader",
         options: {
-          getCustomTransformers: join(__dirname, './webpack.ts-transformer.js')
+          getCustomTransformers: join(__dirname, "./webpack.ts-transformer.js")
         }
       },
       {
         test: /\.css$/,
-        use: [
-          'style-loader',
-          'css-loader'
-        ]
+        use: ["style-loader", "css-loader"]
       }
-    ],
+    ]
   },
   plugins: [
     new HtmlWebpackPlugin({
-      filename: 'index.html',
-      inject: 'body',
-      template: 'src/index.html',
+      filename: "index.html",
+      inject: "body",
+      template: "src/index.html"
     }),
-    new CleanWebpackPlugin(),
+    new CleanWebpackPlugin()
   ],
-  devtool: 'eval-source-map'
+  devtool: "eval-source-map"
 };

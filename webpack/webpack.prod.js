@@ -1,11 +1,11 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require("webpack");
+const merge = require("webpack-merge");
+const TerserPlugin = require("terser-webpack-plugin");
 
-const common = require('./webpack.common.js.js');
+const common = require("./webpack.common.js.js");
 
 module.exports = merge(common, {
-  mode: 'production',
+  mode: "production",
   stats: {
     colors: false,
     hash: true,
@@ -14,21 +14,23 @@ module.exports = merge(common, {
     chunks: true,
     chunkModules: true,
     modules: true,
-    children: true,
+    children: true
   },
   optimization: {
-    minimizer: [new TerserPlugin({
-      cache: true,
-      parallel: true
-    })],
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true
+      })
+    ],
     runtimeChunk: false,
     splitChunks: {
       cacheGroups: {
         default: false,
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'vendor_app',
-          chunks: 'all',
+          name: "vendor_app",
+          chunks: "all",
           minChunks: 2
         }
       }
@@ -36,9 +38,9 @@ module.exports = merge(common, {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production')
-      },
-    }),
-  ],
+      "process.env": {
+        NODE_ENV: JSON.stringify("production")
+      }
+    })
+  ]
 });

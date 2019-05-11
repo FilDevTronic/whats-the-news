@@ -1,8 +1,6 @@
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { App } from './components';
-import './normalize.css';
+import * as React from "react";
+import * as ReactDOM from "react-dom";
+import "./normalize.css";
+import { Home } from "./components";
 
-ReactDOM.render(
-  <App />, document.getElementById('app')
-);
+ReactDOM.render(<Home />, document.getElementById("app"));

@@ -1,5 +1,6 @@
 // 1. import default from the plugin module
-const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const createStyledComponentsTransformer = require("typescript-plugin-styled-components")
+  .default;
 
 // 2. create a transformer;
 // the factory additionally accepts an options object which described below
