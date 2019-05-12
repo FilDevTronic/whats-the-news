@@ -20,7 +20,7 @@ class SearchStore {
   @action
   getUrl = (): string => {
     if (this.query === "") {
-      return `http://hn.algolia.com/api/v1/search_by_date?tags=story&page=${
+      return `https://hn.algolia.com/api/v1/search_by_date?tags=story&page=${
         this.page
       }&hitsPerPage=${this.hitsPerPage}`;
     } else {
