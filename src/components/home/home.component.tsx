@@ -1,15 +1,23 @@
 import * as React from "react";
-import { StyledHome, StyledControls } from ".";
-import { Search, Results, Button, Paginator } from "..";
+import * as S from "./home.styled";
+import { Search, Results } from "..";
+import { searchStore } from "../../stores";
+import { observer } from "mobx-react";
 
-export const Home = (): JSX.Element => (
-  <StyledHome>
-    <Search />
-    <Results />
-    <StyledControls>
-      <Button>Prev</Button>
-      <Paginator />
-      <Button>Next</Button>
-    </StyledControls>
-  </StyledHome>
-);
+@observer
+export class Home extends React.Component {
+  render(): React.ReactNode {
+    return (
+      <S.HomeContainer>
+        {searchStore.isLoading ? (
+          <div>Loading...</div>
+        ) : (
+          <>
+            <Search />
+            <Results />
+          </>
+        )}
+      </S.HomeContainer>
+    );
+  }
+}
