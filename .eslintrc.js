@@ -9,10 +9,12 @@ module.exports = {
   plugins: ["@typescript-eslint"],
   parserOptions: {
     ecmaVersion: 2018,
+    experimentalObjectRestSpread: true,
+    experimentalDecorators: true,
     sourceType: "module",
     ecmaFeatures: {
       jsx: true
-    }
+    },
   },
   settings: {
     react: {
@@ -22,5 +24,6 @@ module.exports = {
   rules: {
     "@typescript-eslint/no-var-requires": 0,
     "react/prop-types": 0,
+    "@typescript-eslint/explicit-member-accessibility": 0
   }
 };

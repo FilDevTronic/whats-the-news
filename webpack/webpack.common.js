@@ -3,19 +3,21 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
 
 module.exports = {
-  entry: resolve(__dirname, "../src/index.tsx"),
+  context: resolve(__dirname, "../src"),
+  entry: "../src/index.tsx",
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx"]
   },
   output: {
-    path: resolve(__dirname, "../dist/"),
-    filename: "bundle.min.js"
+    filename: "bundle.js",
+    path: resolve(__dirname, "../dist")
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         loader: "awesome-typescript-loader",
+        exclude: /node_modules/,
         options: {
           getCustomTransformers: join(__dirname, "./webpack.ts-transformer.js")
         }
@@ -27,12 +29,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
-      filename: "index.html",
-      inject: "body",
-      template: "src/index.html"
-    }),
-    new CleanWebpackPlugin()
+      title: "What's The News?",
+      template: resolve(__dirname, "../src/index.html")
+    })
   ],
   devtool: "eval-source-map"
 };
