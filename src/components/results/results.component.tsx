@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Paginator } from "../../components";
 import * as S from "./results.styled";
+import * as SH from "../../shared-styles";
 import { observer } from "mobx-react";
 import { searchStore } from "../../stores";
 import * as daysjs from "dayjs";
@@ -16,20 +17,22 @@ export class Results extends React.Component {
       <div>
         <S.ResultsContainer>
           {isFetching ? (
-            <S.Loader>Loading...</S.Loader>
+            <SH.Loader />
           ) : (
             <S.StoryContainer>
               {hits.map(
                 (story: HNHit, i: number): JSX.Element => {
-                  const date = daysjs(story.created_at as any).fromNow();
+                  const date = daysjs(story.created_at as string).fromNow();
                   return (
-                    <S.Story key={i} href={`${story.url}`} target="_blank">
-                      <div>{story.title}</div>
-                      <S.StoryDetails>
-                        <S.StoryDetailsText>Posted by </S.StoryDetailsText>
-                        <S.StoryAuthor>{story.author}</S.StoryAuthor> &#47;&#47;
-                        ( {date} ) - [ {story.points} point(s) ]
-                      </S.StoryDetails>
+                    <S.Story key={i}>
+                      <S.StoryLink href={`${story.url}`} target="_blank">
+                        <div>{story.title}</div>
+                        <S.StoryDetails>
+                          <S.StoryDetailsText>Posted by </S.StoryDetailsText>
+                          <S.StoryAuthor>{story.author}</S.StoryAuthor>{" "}
+                          &#47;&#47; ( {date} ) - [ {story.points} point(s) ]
+                        </S.StoryDetails>
+                      </S.StoryLink>
                     </S.Story>
                   );
                 }

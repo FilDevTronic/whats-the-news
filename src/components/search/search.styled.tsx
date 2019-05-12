@@ -33,9 +33,16 @@ export const InputContainer = styled.div`
 
   font-size: 12px;
   color: #fdf6e3;
-  background: #002b36;
+  background-color: #002b36;
   border: 1px solid #657b83;
   border-radius: 50px;
+
+  &:hover,
+  &:active {
+    color: #2aa198;
+    background-color: #073642;
+  }
+  transition: all 1s ease;
 `;
 
 export const Input = styled.input`
@@ -43,16 +50,18 @@ export const Input = styled.input`
   margin-left: 10px;
   color: #fdf6e3;
   border: none;
-  background: #002b36;
+  background: transparent;
   ::selection {
     color: #cb4b16;
-    background-color: #073642;
+    background-color: #002b36;
   }
 
-  &:hover {
+  &:hover,
+  &:active {
     color: #2aa198;
+    background-color: #073642;
   }
-  transition: color 1s ease;
+  transition: all 1s ease;
 `;
 
 export const Icon = styled.i`

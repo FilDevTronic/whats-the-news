@@ -1,20 +1,24 @@
 import { action, observable } from "mobx";
+import { debounce } from "lodash";
 
 class SearchStore {
   @observable query = "";
   @observable page = 0;
   @observable pagesTotal = 0;
-  @observable hitsPerPage = 10;
+  @observable hitsPerPage = 20;
   @observable hits: HNHit[] = [];
   @observable isLoading = true;
   @observable isFetching = true;
+  private fetchNewsDebounced: () => void;
 
   constructor() {
     this.fetchNews();
+
+    this.fetchNewsDebounced = debounce(this.fetchNews, 500);
   }
 
   @action
-  getUrl = (): any => {
+  getUrl = (): string => {
     if (this.query === "") {
       return `http://hn.algolia.com/api/v1/search_by_date?tags=story&page=${
         this.page
@@ -27,7 +31,8 @@ class SearchStore {
   };
 
   @action
-  fetchNews = (): any => {
+  fetchNews = (): void => {
+    this.isFetching = true;
     fetch(this.getUrl())
       .then(
         (response: Response): Promise<HNProps> => {
@@ -36,7 +41,7 @@ class SearchStore {
       )
       .then(
         action(
-          (data: HNProps): any => {
+          (data: HNProps): void => {
             (this.page = data.page),
               (this.pagesTotal = data.nbPages),
               (this.hits = data.hits);
@@ -46,9 +51,9 @@ class SearchStore {
       .finally(
         (): void => {
           setTimeout((): boolean => (this.isFetching = false), 500);
+          this.isLoading = false;
         }
       );
-    this.isLoading = false;
   };
 
   @action
@@ -64,12 +69,15 @@ class SearchStore {
   };
 
   @action
-  updateQuery = (value: string): any => {
+  updateQuery = (value: string): void => {
     this.query = value;
-    this.fetchNews();
+    this.fetchNewsDebounced();
+  };
+
+  @action
+  cancel = (): void => {
+    this.query = "";
   };
 }
 
 export const searchStore = new SearchStore();
-
-console.log(searchStore);

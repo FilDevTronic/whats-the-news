@@ -9,9 +9,13 @@ export class Paginator extends React.Component {
     const { page, pagesTotal, prevPage, nextPage } = searchStore;
     return (
       <S.PaginatorContainer>
-        <S.Button onClick={prevPage}>Prev</S.Button>
+        <S.Button onClick={prevPage} disabled={searchStore.isFetching}>
+          Prev
+        </S.Button>
         Page {page} of {pagesTotal}
-        <S.Button onClick={nextPage}>Next</S.Button>
+        <S.Button onClick={nextPage} disabled={searchStore.isFetching}>
+          Next
+        </S.Button>
       </S.PaginatorContainer>
     );
   }

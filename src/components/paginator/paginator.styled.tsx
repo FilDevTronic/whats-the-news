@@ -8,7 +8,7 @@ export const PaginatorContainer = styled.div`
   margin: 20px auto;
   color: #839496;
   font-family: "Fira Code", "Source Code Pro", "Helvetica", monospace;
-  font-size: 18px;
+  font-size: 12px;
 `;
 
 export const Button = styled.button`
@@ -16,14 +16,17 @@ export const Button = styled.button`
   background: #002b36;
   border: 1px solid #657b83;
   width: 100px;
+  margin: 0 auto;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;
 
-  &:hover {
+  &:hover,
+  &:active {
     color: #b58900;
+    background: #073642;
   }
-  transition: color 1s ease;
+  transition: all 1s ease;
 
   font-family: "Fira Code", "Source Code Pro", "Helvetica", monospace;
   font-size: 14px;

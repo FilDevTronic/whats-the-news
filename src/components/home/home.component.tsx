@@ -1,5 +1,6 @@
 import * as React from "react";
 import * as S from "./home.styled";
+import * as SH from "../../shared-styles";
 import { Search, Results } from "..";
 import { searchStore } from "../../stores";
 import { observer } from "mobx-react";
@@ -10,7 +11,7 @@ export class Home extends React.Component {
     return (
       <S.HomeContainer>
         {searchStore.isLoading ? (
-          <div>Loading...</div>
+          <SH.Loader />
         ) : (
           <>
             <Search />
